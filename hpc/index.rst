@@ -8,18 +8,22 @@ the Linux operating system
 or even a command line before
 this is the place to start.
 This guide will get you set up using the University's clusters
-(Bessemer and ShARC) fairly quickly.
+(Stanage and Bessemer) fairly quickly.
 
 .. toctree::
    :maxdepth: 2
 
+   what-is-hpc
    accounts
+   myapps
    connecting
    mfa
    filestore
    transferring-files
    scheduler/index
+   scheduler/advanced_job_submission_and_control
    modules
-   hw-accel-gfx
-   jupyterhub
+   Choosing-appropriate-resources
+   installing-software
+   flight-desktop
    hpcgateway

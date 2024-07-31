@@ -16,12 +16,14 @@ Interactive Usage
 -----------------
 
 After :ref:`connecting to Bessemer <connecting>`,
-start :ref:`an interactive session <submit-queue>`.
+start :ref:`an interactive session <submit_interactive_bessemer>`.
 
 You can then load a version of of Java using one of the following: ::
 
    module load Java/11
    module load Java/11.0.2
+
+NB ``Java/11.0.2`` is `OpenJDK <https://openjdk.org/>`__.
 
 Check that you have the version you expect. First, the runtime ::
 

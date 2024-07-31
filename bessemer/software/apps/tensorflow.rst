@@ -31,18 +31,13 @@ The use of Anaconda (:ref:`python_conda_bessemer`) is recommended as
 it is able to create a virtual environment in your home directory,
 allowing the installation of new Python packages without needing admin permissions.
 
-This software and documentation is maintained by the `RSES group <https://rse.shef.ac.uk/>`_
-and `GPUComputing@Sheffield <http://gpucomputing.shef.ac.uk/>`_.
-For feature requests or if you encounter any problems,
-please raise an issue on the `GPU Computing repository <https://github.com/RSE-Sheffield/GPUComputing/issues>`_.
-
 Installation in Home Directory - CPU Version
 --------------------------------------------
 
 In order to to install to your home directory,
 Conda is used to create a virtual python environment for installing your local version of TensorFlow.
 
-First request an interactive session, e.g. with :ref:`slurm_interactive`.
+First request an interactive session, e.g. with :ref:`submit_interactive_bessemer`.
 
 Then TensorFlow can be installed by the following: ::
 
@@ -71,6 +66,9 @@ Installation in Home Directory - GPU Version
 The GPU version of TensorFlow is a distinct Pip package and
 is also dependent on CUDA and cuDNN libraries,
 making the installation procedure slightly different.
+
+.. warning::
+   You will need to ensure you load CUDA and cuDNN modules which are compatible with the version of TensorFlow used (see :ref:`table<tensorflow_cudnn_compat_bess>`).
 
 First request an interactive session, e.g. see :ref:`GPUInteractive_bessemer`.
 
@@ -143,22 +141,11 @@ This indicates that TensorFlow was expecting to find CUDA 10.0 (and an appropria
 The following table shows the which module to load for the various versions of TensorFlow,
 based on the `tested build configurations <https://www.tensorflow.org/install/source#linux>`_.
 
-+------------+------+--------+-------------------------------------------------------+
-| TensorFlow | CUDA | cuDNN  | cuDNN module to load                                  |
-+============+======+========+=======================================================+
-| 2.2.0      | 10.1 | >= 7.6 | ``cuDNN/7.6.4.38-gcccuda-2019b`` (inc. CUDA 10.1.243) |
-+------------+------+--------+-------------------------------------------------------+
-| 2.1.0      | 10.1 | >= 7.6 | ``cuDNN/7.6.4.38-gcccuda-2019b`` (inc. CUDA 10.1.243) |
-+------------+------+--------+-------------------------------------------------------+
-| 2.0.0      | 10.0 | >= 7.4 | ``cuDNN/7.4.2.24-CUDA-10.0.130``                      |
-+------------+------+--------+-------------------------------------------------------+
-| 1.14.0     | 10.0 | >= 7.4 | ``cuDNN/7.4.2.24-CUDA-10.0.130``                      |
-+------------+------+--------+-------------------------------------------------------+
-| 1.13.1     | 10.0 | >= 7.4 | ``cuDNN/7.4.2.24-CUDA-10.0.130``                      |
-+------------+------+--------+-------------------------------------------------------+
-| >= 1.5.0   | 9.0  | 7      | N/A                                                   |
-+------------+------+--------+-------------------------------------------------------+
-| >= 1.3.0   | 8.0  | 6      | N/A                                                   |
-+------------+------+--------+-------------------------------------------------------+
-| >= 1.0.0   | 8.0  | 5.1    | N/A                                                   |
-+------------+------+--------+-------------------------------------------------------+
+.. _tensorflow_cudnn_compat_bess:
+
+.. include:: /referenceinfo/imports/software/tensorflow/compat-table-import.rst
+
+Training
+--------
+
+The Research Software Engineering team has an `introductory workshop on deep learning with the TensorFlow Keras framework <https://rses-dl-course.github.io/>__`.

@@ -1,10 +1,10 @@
-.. image:: https://readthedocs.org/projects/iceberg/badge/?version=latest
-    :target: https://readthedocs.org/projects/iceberg/builds/
+.. image:: https://github.com/rcgsheffield/sheffield_hpc/actions/workflows/static.yml/badge.svg
+    :target: https://github.com/rcgsheffield/sheffield_hpc/actions/workflows/static.yml
 
 Sheffield High Performance Computing Documentation
 ==================================================
 
-This is the source for the documentation of Bessemer and ShARC, The University of Sheffield's High Performance Computing clusters.
+This is the source for the documentation of Stanage and Bessemer, The University of Sheffield's High Performance Computing clusters.
 
 It is written in the reStructuredText_ (*rst*) format and the Sphinx_ tool is used to convert this to a set of HTML pages.
 
@@ -12,17 +12,18 @@ For a guide on the rst file format see `this <http://thomas-cokelaer.info/tutori
 
 Rendered Documentation
 ----------------------
-`This website <https://docs.hpc.shef.ac.uk/en/latest/>`_  is currently automatically built from this repository:
-each push to the ``master`` branch causes the `ReadTheDocs <https://readthedocs.org/>`__ service to
-build and serve the documentation.
+`This website <https://docs.hpc.shef.ac.uk/en/latest/>`_  is currently automatically built from `this repository <https://github.com/rcgsheffield/sheffield_hpc>`_:
+each push to the ``master`` branch causes a `GitHub Actions <https://github.com/rcgsheffield/sheffield_hpc/actions/>`__ workflow to build and serve the documentation via GitHub Pages.
 
 How to Contribute
 -----------------
-To contribute to this documentation, first you have to fork it on GitHub and clone it to your machine, see `Fork a Repo <https://help.github.com/articles/fork-a-repo/>`_ for the GitHub documentation on this process.
+To contribute to this documentation, first you have to fork it on GitHub and clone it to your machine,
+see `Fork a Repo <https://help.github.com/articles/fork-a-repo/>`_ for the GitHub documentation on this process.
 
 Once you have the git repository locally on your computer,
-you will need to install specific versions of the ``sphinx`` and ``sphinx_bootstrap_theme`` to be able to build the documentation.
-See the instructions below for how to achieve this.
+you will need to ensure you have Python and the Tox_ build tool installed.
+
+Please see our `Documentation Reference <https://docs.hpc.shef.ac.uk/en/latest/referenceinfo/admins/>`_ which is a valuable resource for admins of our documentation.
 
 Once you have made your changes and updated your Fork on GitHub you will need to `Open a Pull Request <https://help.github.com/articles/using-pull-requests/>`_.
 All changes to the repository should be made through Pull Requests, including those made by the people with direct push access.
@@ -30,7 +31,7 @@ All changes to the repository should be made through Pull Requests, including th
 Building the documentation on a local Windows machine
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Install **Python 3** on your machine by downloading and running the `Miniconda installer`_:
+#. Install **Python 3** on your machine by downloading and running the Miniconda_ installer:
 
    * Install for *just you*;
    * Install to the default location (e.g. ``C:\Users\myusername\Miniconda3``);
@@ -41,79 +42,107 @@ Building the documentation on a local Windows machine
 
 #. Create a new *conda environment* for building the documentation by running the following from this window: ::
 
-    conda create --name sheffield_hpc python=3
+    conda create --name sheffield_hpc python=3.10
     conda activate sheffield_hpc	# . activate sheffield_hpc on older versions of conda
-    pip install -r requirements.txt
+    pip install tox
 
 #. To build the HTML documentation run: ::
 
-    make html
-	
-   Or if you don't have the ``make`` utility installed on your machine then build with *sphinx* directly: ::
+    tox -e py310
 
-    sphinx-build . ./html
+The output should be written to ``./_build/html``.
 
 Building the documentation on a local Linux machine
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Ensure Python 3 is installed.
-#. Create a `virtual environment <https://docs.python.org/3/tutorial/venv.html>`_ to install sphinx into: ::
+#. Ensure one of Python 3.10 or 3.11 are installed.
+#. Ensure the Tox_ build tool is installed and can be used/seen by your chosen Python interpreter.
 
-    mkdir -m 700 ~/.venvs
-    python3 -m venv ~/.venvs/sheffield_hpc_py3
-    source ~/.venvs/sheffield_hpc_py3/bin/activate
+#. Run Tox to create an isolated Python virtual environment then build documentation: ::
 
-#. Install the Python packages needed to build the HTML documentation: ::
+     tox -e py310
+     tox -e py311
 
-     pip3 install -r requirements.txt
-
-#. Build the documentation: ::
-
-     make html
+The output should be written to ``./_build/html``.
 
 Building the documentation on a local Mac machine
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. Ensure Python 3 is installed.  If you do not already have a python distribution installed, we recommend you install :ref:`Miniconda <Miniconda installer>`.
+#. Ensure Python 3 is installed.  If you do not already have a python distribution installed, we recommend you install Miniconda_.
 #. Install the Python packages needed to build the HTML documentation.  If you are using (mini)conda create a new *conda environment* for building the documentation by running: ::
 
     export PATH=${HOME}/miniconda3/bin:$PATH
-    conda create -n sheffield_hpc python=3
-    pip install -r requirements.txt
-
-   If you are *not* using (mini)conda to provide Python 3: ::
-
-    mkdir -m 700 ~/.venvs
-    python3 -m venv ~/.venvs/sheffield_hpc_py3
-    source ~/.venvs/sheffield_hpc_py3/bin/activate
-    pip3 install --requirement requirements.txt
+    conda create -n sheffield_hpc python=3.10
+    conda activate sheffield_hpc	# . activate sheffield_hpc on older versions of conda
+    pip install tox
 
 #. To build the HTML documentation run::
 
-    make html
+    tox -e py310
+
+The output should be written to ``./_build/html``.
 
 Check external links
 ^^^^^^^^^^^^^^^^^^^^
 
 Do this with: ::
 
-   make linkcheck
+   tox -e py310-linkcheck
 
 Continuous build and serve
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Build and serve the site and automatically rebuild when source files change:
+Build and serve the site and automatically rebuild when source files change: ::
 
-    make livehtml
+   tox -e py310-livehtml
 
 Testing the building of the documentation
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The validity of the reStructuredText in this repo and the ability to convert that to HTML with Sphinx can be tested in three ways:
 
-* Locally by contributors when they run e.g. ``make html``
-* By a [GitHub Actions](https://github.com/rcgsheffield/sheffield_hpc/actions/) Workflow each time a contributor creates or updates a Pull Request.
-* By `ReadTheDocs <https://readthedocs.org/projects/iceberg/>`__ on each push to the ``master`` branch.
+* Locally by contributors when they run e.g. ``tox -e py310-livehtml``
+* By a `GitHub Actions <https://github.com/rcgsheffield/sheffield_hpc/actions/>`__ Workflow each time a contributor creates or updates a Pull Request.
+* By a `GitHub Actions <https://github.com/rcgsheffield/sheffield_hpc/actions>`__) Workflow on each push to the ``master`` branch.
+
+Important files / folders
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+* ``conf.py`` - Sphinx configuration file.
+* ``requirements.txt`` - Main requirements file.
+* ``setuptoolsrequirements.txt`` - Initial requirements file set in order to first pin setuptools to version 57.5.0 to `retain support for the current theme <https://github.com/ryan-roemer/sphinx-bootstrap-theme/issues/216>`__.
+* ``tox.ini`` - Tox configuration file.
+* ``Makefile`` 
+* ``global.rst`` - A globally included file (goes into all pages) which is excluded from direct building using exclude_patterns in ``conf.py``.
+* ``referenceinfo/imports`` - sub-folder tree of files to be included by not directly built. This is excluded from direct building using exclude_patterns in ``conf.py``.
+* ``_static/css/custom.css`` - custom CSS overrides for the theme.
+* ``themes/sheffieldhpc`` - Sheffield HPC custom theme components (Sphinx HTML templates, media files, CSS etc...). This functions as an overlay to the default Sphinx RTD theme.
+* ``.github/workflows`` - GitHub Actions workflows for pull requests, pushes to ``master`` and link checking.
+
+Custom Google Search Engine
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As the built in Sphinx search is naive / poor, a custom Google CSE has been added (currently implemented as per https://github.com/rcgsheffield/sheffield_hpc/pull/1971).
+
+This is implemented with the following steps:
+
+1. Create Google custom search on console: https://cse.google.com/cse/all
+2. Copy HTML snippet for Google custom search
+3. Paste it into `_templates/searchbox.html`.
+4. Configure `html_sidebars` to use `searchbox.html` in your document.
+5. Ensure your `templates_path` is set to correctly source the templates directory.
+6. Customise the theming, search domain and other settings at https://cse.google.com/cse/all if not done already.
+7. Test the search is configured and functioning as desired.
+
+Making or using imported files from the ``referenceinfo/imports`` area
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This area is intended to be used to contain .rst files which we wish to use in more than one location which can be imported. The general method for making use of imported files is as follows:
+
+* Make a new file to be imported within a sensible subdirectory within this area e.g. ``/referenceinfo/imports/software/mysoftware/import.rst``
+* Import your new file into your main page with: ``.. include:: /referenceinfo/imports/software/mysoftware/import.rst``
+* Build the documentation and ensure that hierarchical elements are correct e.g. titles within toctrees must be correct to fit in the parent document properly.
+* Add a comment within the import / parent document to explain why the import is necessary if it is not immediately obvious.
 
 (Re)-generating PNG images from Mermaid.js diagram definitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -128,4 +157,5 @@ How to install mermaid-cli and regenerate one of these diagrams: ::
 
 .. _Sphinx: https://www.sphinx-doc.org/en/master/
 .. _reStructuredText: https://docutils.sourceforge.io/rst.html
-.. _Miniconda installer: https://conda.io/miniconda.html
+.. _Miniconda: https://conda.io/miniconda.html
+.. _Tox: https://tox.readthedocs.io/en/latest/

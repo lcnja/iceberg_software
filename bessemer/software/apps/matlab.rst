@@ -5,9 +5,9 @@ MATLAB
 
 .. sidebar:: MATLAB
 
-   :Versions:  2020b, 2020a, 2019a, 2018b
+   :Versions:  2022a, 2021b, 2021a, 2020b, 2020a, 2019a, 2018b
    :Support Level: FULL
-   :Dependancies: None
+   :Dependencies: None
    :URL: https://uk.mathworks.com/products/matlab
    :Documentation: https://uk.mathworks.com/help/matlab
 
@@ -18,11 +18,11 @@ Interactive usage
 -----------------
 After connecting to Bessemer,  start an interactive session with the ``srun --pty bash –i`` command.
 
-The latest version of MATLAB (currently 2020b) is made available by running:
+The latest version of MATLAB (currently 2022a) is made available by running:
 
 .. code-block:: bash
 
-   module load MATLAB/2020b
+   module load MATLAB/2022a
 
 Alternatively, you can load earlier MATLAB versions by running:
 
@@ -31,6 +31,10 @@ Alternatively, you can load earlier MATLAB versions by running:
    module load MATLAB/2018b
    module load MATLAB/2019a
    module load MATLAB/2020a
+   module load MATLAB/2020b
+   module load MATLAB/2021a
+   module load MATLAB/2021b
+   module load MATLAB/2022a
 
 You can then run MATLAB by entering ``matlab &``.
 
@@ -53,7 +57,7 @@ We assume you'll call this ``my_job.slurm``:
    #!/bin/bash
    #SBATCH --mem=16000                # Request  16 GB of real memory
 
-   module load MATLAB/2020b
+   module load MATLAB/2022a
 
    matlab -nodesktop -nosplash -r helloworld
 
@@ -88,7 +92,7 @@ Create a Slurm submission script called ``parallel_example.slurm`` containing:
    #SBATCH --time=00:05:00
    #SBATCH --job-name=matlab_par_test
    
-   module load MATLAB/2020b
+   module load MATLAB/2022a
    
    matlab -nodisplay -nosplash -r "parallel_example($SLURM_NTASKS)"
 
@@ -154,4 +158,22 @@ MATLAB 2020b was installed using the MATLAB installer GUI in the following direc
     /usr/local/packages/live/noeb/MATLAB/2020b/binary/
 
 The 2020b modulefile is :download:`/usr/local/modulefiles/live/noeb/MATLAB/2020b/binary </bessemer/software/modulefiles/MATLAB/2020b/binary>`.
+
+MATLAB 2021a was installed using the MATLAB installer GUI in the following directory::
+	
+    /usr/local/packages/live/noeb/MATLAB/2021a/binary/
+
+The 2021a modulefile is :download:`/usr/local/modulefiles/live/noeb/MATLAB/2021a/binary </bessemer/software/modulefiles/MATLAB/2021a/binary>`.
+
+MATLAB 2021b was installed using the MATLAB installer GUI in the following directory::
+	
+    /usr/local/packages/live/noeb/MATLAB/2021b/binary/
+
+The 2021b modulefile is :download:`/usr/local/modulefiles/live/noeb/MATLAB/2021b/binary </bessemer/software/modulefiles/MATLAB/2021b/binary>`.
+
+MATLAB 2022a was installed using the MATLAB installer GUI in the following directory::
+	
+    /usr/local/packages/live/noeb/MATLAB/2022a/binary/
+
+The 2022a modulefile is :download:`/usr/local/modulefiles/live/noeb/MATLAB/2022a/binary </bessemer/software/modulefiles/MATLAB/2022a/binary>`.
 

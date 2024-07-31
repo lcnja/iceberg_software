@@ -1,7 +1,20 @@
 .. _parallel:
 
+
+
+==================
 Parallel Computing
 ==================
+
+.. toctree::
+   :maxdepth: 1
+   :hidden:
+
+   JobArray
+   SMP
+   MPI
+   Hybrid
+   GPUComputing
 
 Parallel Computing uses more than one core.
 A *core* (also called *processor*) is capable of executing one
@@ -41,19 +54,17 @@ This gives rise to a number of ways to use multiple cores:
 - don't care which nodes, can run at different times: `Array Job <JobArray.html>`_.
 
 If you are using a standardised piece of software designed to
-run on HPC, for example `CASTEP <sharc/software/apps/castep.html>`_ or
-`GROMACS <sharc/software/apps/gromacs.html>`_, it may well come
+run on HPC, for example `CASTEP </sharc/software/apps/CASTEP.html>`_ or
+`GROMACS </sharc/software/apps/gromacs.html>`_, it may well come
 with its own opinions about the best parallel setup to use.
-Consult the `software documentation <sharc/software/>`_.
+Consult the `software documentation </sharc/software/>`_.
 
-If you need advice on how to parallelise your workflow, please contact the `Research Software Engineering Group <https://rse.shef.ac.uk/contact/>`_
+.. include:: ../referenceinfo/scheduler/SGE/sge_parallel_environments.rst
 
-.. toctree::
-   :maxdepth: 1
-   :hidden:
+-------------
 
-   JobArray
-   SMP
-   MPI
-   Hybrid
-   GPUComputing
+Getting help
+------------
+
+If you need advice on how to parallelise your workflow,
+please :ref:`contact IT Services or the Research Software Engineering team <need_help>`.

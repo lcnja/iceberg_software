@@ -1,25 +1,8 @@
-.. _sharc:
-
+:orphan: yes
 ShARC
 =====
+.. raw:: html
 
-This is the documentation for ShARC (Sheffield Advanced Research Computer), The University of Sheffield's new High Performance Computing System and the successor to the decommissioned Iceberg cluster.
+    <meta http-equiv="refresh" content="0; URL=../decommissioned/sharc/index.html" />
 
-.. toctree::
-  :hidden:
-  :maxdepth: 1
-  :glob:
-
-  software/index
-  cluster_specs
-  sge
-  GPUComputingShARC
-  DeepLearningShARC
-  groupnodes/index
-
-* :ref:`sharc-software`
-* :ref:`sharc-specs`
-* :ref:`sge_info`
-* :ref:`GPUComputing_sharc`
-* :ref:`DeepLearning_sharc`
-* :ref:`groupnodes_sharc`
+This page is now a stub, the page you are looking for can be found :ref:`here<sharc>`

@@ -22,11 +22,6 @@ The use of Anaconda (:ref:`python_conda_bessemer`) is recommended as
 it is able to create a virtual environment in your home directory,
 allowing for the installation of new Python packages without needing admin permission.
 
-This software and documentation is maintained by the `RSES group <https://rse.shef.ac.uk/>`_
-and `GPUComputing@Sheffield <http://gpucomputing.shef.ac.uk/>`_.
-For feature requests or if you encounter any problems,
-please raise an issue on the `GPU Computing repository <https://github.com/RSE-Sheffield/GPUComputing/issues>`_.
-
 Installation in Home Directory
 ------------------------------
 
@@ -37,7 +32,7 @@ Conda is used to create a virtual python environment for installing your local v
    so you **must** use the ``--mem=8G`` flag to request more memory.
    ``8G`` means 8 GB of RAM.
 
-First request an interactive session, e.g. with :ref:`slurm_interactive` or optionally with GPU :ref:`GPUInteractive_bessemer`. ::
+First request an interactive session, e.g. with :ref:`submit_interactive_bessemer` or optionally with GPU :ref:`GPUInteractive_bessemer`. ::
 
    # To request 8GB of RAM for the session
    srun --mem=8G --pty bash

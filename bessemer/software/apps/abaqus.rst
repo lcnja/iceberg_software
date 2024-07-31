@@ -55,13 +55,13 @@ Batch jobs
 The following is an example batch submission script, ``my_job.sh``, to run the executable ``abaqus`` with input file is ``s4d.inp``. The script requests 4 cores using the OpenMP parallel environment ``smp`` with a runtime of 30 mins and 2 GB of real memory per core. ::
 
     #!/bin/bash
-    #SBATCH --comment=abaqus_smp_test
+    #SBATCH --job-name=abaqus_smp_test
     #SBATCH --nodes=1
     #SBATCH --ntasks-per-node=4
     #SBATCH --mem=8000
     #SBATCH --output=output_abaqus_smp_4
     #SBATCH --time=00:30:00
-    #SBATCH --mail-user=joe.bloggs@sheffield.ac.uk
+    #SBATCH --mail-user=a.person@sheffield.ac.uk
     #SBATCH --mail-type=ALL
     module load ABAQUS/2018
     unset SLURM_GTIDS
@@ -78,13 +78,13 @@ The job is submitted to the queue by typing::
 The script below is an example of a batch submission script for a single core job with a runtime of 30 mins, 8 GB of real memory and with user subroutine ``umatmst3.f`` and input file ``umatmst3.inp``. ::
 
     #!/bin/bash
-    #SBATCH --comment=abaqus_subroutine_test
+    #SBATCH --job-name=abaqus_subroutine_test
     #SBATCH --nodes=1
     #SBATCH --ntasks-per-node=1
     #SBATCH --mem=8000
     #SBATCH --output=output_abaqus_subroutine
     #SBATCH --time=00:30:00
-    #SBATCH --mail-user=joe.bloggs@sheffield.ac.uk
+    #SBATCH --mail-user=a.person@sheffield.ac.uk
     #SBATCH --mail-type=ALL
     module load ABAQUS/2018
     module load ifort/2019.1.144-GCC-8.2.0-2.31.1
@@ -156,13 +156,13 @@ and launched using::
 The following is an example batch submission script, ``my_job.sh``, to run the executable ``abaqus`` with input file is ``s4d.inp``. The script requests 4 cores using the OpenMP parallel environment ``smp`` with a runtime of 30 mins and 2 GB of real memory per core. ::
 
     #!/bin/bash
-    #SBATCH --comment=abaqus_smp_test
+    #SBATCH --job-name=abaqus_smp_test
     #SBATCH --nodes=1
     #SBATCH --ntasks-per-node=4
     #SBATCH --mem=8000
     #SBATCH --output=output_abaqus_smp_4
     #SBATCH --time=00:30:00
-    #SBATCH --mail-user=joe.bloggs@sheffield.ac.uk
+    #SBATCH --mail-user=a.person@sheffield.ac.uk
     #SBATCH --mail-type=ALL
     module use /usr/local/modulefiles/live/apps
     module load ABAQUS/6.14.2/binary

@@ -22,10 +22,21 @@ import shutil
 extensions = [
     'sphinx.ext.intersphinx',
     'sphinx.ext.todo',
+    'sphinx_substitution_extensions',
+    'sphinxcontrib.jquery',
+    'sphinx_rtd_theme',
+    'sphinx_copybutton',
+    'sphinx_tabs.tabs',
+    'sphinx_design',
+    'sphinx_sitemap',
 ]
 
+# Sphinx Sitemap
+html_baseurl = "https://docs.hpc.shef.ac.uk/"
+sitemap_url_scheme = "{lang}latest/{link}"
+
 # Add any paths that contain templates here, relative to this directory.
-# templates_path = ['_templates']
+templates_path = ['_templates']
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -36,9 +47,9 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Sheffield HPC Documentation'
-copyright = u'2021, The University of Sheffield'
-author = u'The University of Sheffield'
+project = 'Sheffield HPC Documentation'
+copyright = '2024, The University of Sheffield'
+author = 'The University of Sheffield'
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -54,11 +65,19 @@ release = ''
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+language = 'en'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-exclude_patterns = ['_build', 'themes', 'README.rst']
+exclude_patterns = [
+    '_build',
+    'themes',
+    'README.rst',
+    'global.rst',
+    '.tox',
+    'mypy_cache',
+    'referenceinfo/imports'
+]
 
 # The name of the Pygments (syntax highlighting) style to use.
 pygments_style = 'sphinx'
@@ -74,7 +93,7 @@ html_theme = 'sheffieldhpc'
 html_theme_path = ['themes'] + [sphinx_rtd_theme.get_html_theme_path()]
 html_theme_options = {
     'style_external_links': True,
-    'canonical_url': 'https://docs.hpc.sheffield.ac.uk',
+    'navigation_depth': 6,
 }
 
 # html_theme_options = {'navbar_sidebarrel':False,
@@ -85,8 +104,8 @@ html_theme_options = {
 #                       'navbar_title': ' ',
 #                       'navbar_links': [
 #                           ("Home", "index"),
-#                           ("Research Computing @ IT Services", "https://www.shef.ac.uk/it-services/research", True),
-#                           ("Research Software Engineering @ TUOS", "https://rse.shef.ac.uk", True)
+#                           ("Research and Innovation team, IT Services", "https://students.sheffield.ac.uk/it-services/research", True),
+#                           ("Research Software Engineering", "https://rse.shef.ac.uk", True)
 #                       ],
 #                       'globaltoc_depth': 1}
 
@@ -95,7 +114,9 @@ html_theme_options = {
 #                 'using-iceberg/**': ['softwaretoc.html'],
 #                 'index': []}
 
-#html_sidebars = {'**': ['softwaretoc.html']}
+# This template override file can be found in _templates/searchbox.html
+# The sidebar is currently being overridden with the Google Custom Search engine.
+html_sidebars = {'**': ['searchbox.html']}
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
@@ -103,7 +124,7 @@ html_title = 'Sheffield HPC Documentation'
 
 # The name of an image file (relative to this directory) to place at the top
 # of the sidebar.
-html_logo = 'themes/sheffieldhpc/static/img/crest-l.gif'
+html_logo = 'themes/sheffieldhpc/static/img/UOSLogo_Primary_Violet_RGB_small.png'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
@@ -127,3 +148,19 @@ man_pages = [
     (master_doc, 'iceberg', u'Sheffield HPC Documentation',
      [author], 1)
 ]
+
+
+# Add the global rst to make substitutions available
+rst_prolog = open('global.rst', 'r').read()
+
+sphinx_tabs_valid_builders = ['linkcheck']
+sphinx_tabs_disable_tab_closing = True
+
+# We use the additional pages to implement some redirects from old pages
+# we want a redirect for, but not available in the toctree.
+#
+# Adding via this method avoids the toctree globbing adding duplicate redirect
+# pages.
+html_additional_pages = {
+    'stanage/software/apps/singularity': 'singularity-stanage-redirect.html',
+}
